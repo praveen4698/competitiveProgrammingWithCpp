@@ -26,7 +26,7 @@ using namespace __gnu_pbds;
                     }
                 }
 
-                struct compare{
+        struct compare{
         bool operator()(const pair<int,int> l,const pair<int,int> r)
 			{
 				return l.S > r.S;
