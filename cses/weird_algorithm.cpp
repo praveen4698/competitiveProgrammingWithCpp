@@ -7,7 +7,7 @@ int main() {
     scanf("%lld", &t);
     while(1) {
         printf("%lld ", t);
-        if( t== 1ll) {
+        if( t== 1) {
             break;
         }
         if(t&1) {
