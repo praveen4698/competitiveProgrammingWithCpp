@@ -57,28 +57,116 @@ string longestPalindrome(string s) {
         // cout<<left<<right<<endl;
         return s.substr(left, ans);
 }
+
+
+void merge_1(vector<int> &A, vector<int> &B) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+
+    
+    int n = B.size();
+    auto iter = A.begin();
+    int index = 0;
+    for(int i=0;i<n;++i) {
+        // cout<<*(iter)<<endl;
+        while( B[i] > A[index] && index < int(A.size())) {
+            index++;
+        }
+        // iter++;
+        A.insert(A.begin() + index, B[i]);
+        if( index == (A.size()-1)) {
+            index++;
+        }
+    }
+    for(int i : A)
+        cout<<i<<endl;
+    return;
+}
+
+class Test {
+    int a;
+    public:
+    Test() {
+        a = 2;
+        cout<<this->get_a()<<endl;
+    }
+    int get_a() {
+        return this->a;
+    }
+};
+
+int getRich(long initialEnergy, vector<int> energy, vector<int> coins) {
+
+    int n = coins.size();
+    vector<int> sum(n+1,0);
+    for(int i=n-1;i>=0;--i) {
+        sum[i] = sum[i+1] + coins[i];
+    }
+    int ans = 0;
+    if( initialEnergy >= n-1 )
+        return sum[0];
+
+    vector<int> temp;
+    temp.push_back(int(initialEnergy+1));
+    vector<vector<int> > dp(n+1, vector<int>(n+1, -1));
+    dp[0][int(initialEnergy+1)] = 0;
+    for(int i=0;i<n;++i) {
+        vector<int> t;
+        for(int tt: temp) {
+
+            // if( i == 0) {
+            //     tt++;
+            // }
+            cout<<tt<<" "<<i<<endl;
+            if( tt-1 >= 0)
+            {
+                t.push_back(tt-1);
+                dp[i+1][tt-1] = dp[i][tt] + coins[i];
+                cout<<"DP "<<i+1<<" "<<tt-1<<" "<<dp[i+1][tt-1]<<endl;
+                ans = max(ans, dp[i+1][tt-1]);
+            }
+            int a = tt + energy[i] -1;    
+            // if( i == 0) {
+            //     a++;
+            // }        
+            if( a >= n-1-i) {
+                ans = max(ans, sum[i+1] + dp[i][tt]);
+            }
+            else {
+                t.push_back(a);
+                dp[i+1][a] = dp[i][tt];
+                cout<<"DP-2- "<<i+1<<" "<<a<<" "<<dp[i+1][a]<<endl;
+            }
+        }
+        cout<<ans<<"asdfasd"<<endl;
+
+
+        temp.clear();
+        for(int j:t) {
+            temp.push_back(j);
+        }
+    }
+    return ans;
+}
 int main() {
-    printf(" hi there");
-    long long int sum[1000000];
-    memset(sum, 0ll, sizeof(sum));
-    vector<long long int> A;
-    int n, q;
-    scanf("%d %d", &n, &q);
-    sum[0] = 0ll;
-    for(int i=1;i<=n;++i){
-        long long int a;
-        cin>>a;
-        if( i == 0) {
-            sum[i] = a;
-        }
-        else {
-            sum[i] = sum[i-1] + a;
-        }
-    }
-    while(q--) {
-        int a,b;
-        scanf("%d %d", &a, &b);
-        printf("%lld\n", sum[b] - sum[a-1]);
-    }
-    return 0;
+   
+    // Test a = Test();
+    // cout<<a.get_a()<<endl;
+    int n = 1;
+    vector<int> e;
+    e.push_back(1);
+    e.push_back(5);
+    e.push_back(3);
+    e.push_back(3);
+    e.push_back(1);
+    vector<int> c;
+    c.push_back(3);
+    c.push_back(23);
+    c.push_back(9);
+    c.push_back(2);
+    c.push_back(2);
+    cout<<getRich(n, e, c)<<endl;
+
 }

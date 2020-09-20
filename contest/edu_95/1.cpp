@@ -11,5 +11,20 @@ const long long int  mod = 998244353;
 int main()
 {
     
+    int t;
+    cin>>t;
+    while(t--) {
+        long long int x,y,k;
+        cin>>x>>y>>k;
+        fflush(stdout);
+        long long int value = k + k*y - 1ll;
+
+        long long int ans = value/(x-1ll);
+        // if(value%(x-1) > 0 ) {
+        //     ans++;
+        // }
+
+        cout<<ans<<endl;
+    }
     return 0;
 }

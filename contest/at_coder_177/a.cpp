@@ -10,6 +10,14 @@ const long long int  mod = 998244353;
 
 int main()
 {
+    long long int d,t,s;
+    cin>>d>>t>>s;
+    if( d <= t*s)
+        cout<<"Yes"<<endl;
+    else
+    {
+        cout<<"No"<<endl;
+    }
     
     return 0;
 }

@@ -1,0 +1,23 @@
+class Solution:
+	# @param A : head node of linked list
+	# @param B : head node of linked list
+	# @return the head node in the linked list
+	def mergeTwoLists(self, A, B):
+	    ans = None
+	    cur = None
+	    while A or B:
+	        if (not B) or ( A.val < B.val):
+	            if ans == None:
+	                ans = A
+	                cur = ans   
+	            else:
+	                cur.next = A
+	                cur = cur.next
+	        else:
+	            if ans == None:
+	                ans = B
+	                cur = B
+	            else:
+	                cur.next = A
+	                cur = cur.next
+	   return ans
